@@ -1,10 +1,10 @@
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+from sklearn.cross_validation import train_test_split
 import keras
 from keras.wrappers.scikit_learn import KerasClassifier, KerasRegressor
-from sklearn.model_selection import GridSearchCV
+from sklearn.grid_search import GridSearchCV
 
 iris = load_iris()
 X, y = iris.data, iris.target
