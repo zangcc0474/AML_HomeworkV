@@ -11,12 +11,15 @@ from sklearn.multiclass import OneVsOneClassifier
 from sklearn.svm import LinearSVC
 
 
-image_list = pd.read_csv('/rigel/edu/coms4995/users/cz2431/AML_HomeworkV/task4/list.txt',sep=' ',skiprows = 6,header= None)
-image_names = image_list[:][0]
-image_names = np.asarray(image_names)
+image_name = [i for i in os.listdir('/rigel/edu/coms4995/datasets/pets/') if 'jpg' in i]
+image_name_loc = []
+for j in image_name:
+    tmp = '/rigel/edu/coms4995/datasets/pets/'+j
+    image_name_loc.append(tmp)
 
-imagesNames = [image.load_img(os.path.join("/rigel/edu/coms4995/datasets/pets", name + '.jpg'), target_size=(224, 224)) for name in image_names]
-X = np.array([image.img_to_array(img) for img in imagesNames])
+im = [image.load_img(i, target_size=(224, 224)) for i in image_name_loc]
+
+X = np.array([image.img_to_array(j) for j in im])
 
 # build the VGG16 network
 model = applications.VGG16(include_top=False,
