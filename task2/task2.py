@@ -1,23 +1,14 @@
-
-# coding: utf-8
-
-# In[11]:
-
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+from sklearn.cross_validation import train_test_split
 import keras
 from keras.wrappers.scikit_learn import KerasClassifier, KerasRegressor
-from sklearn.model_selection import GridSearchCV
+from sklearn.grid_search import GridSearchCV
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-get_ipython().magic('matplotlib inline')
-plt.rcParams["figure.dpi"] = 200
 
-
-# In[2]:
 
 model = Sequential([
     Dense(32, input_shape=(784,)),
@@ -28,20 +19,16 @@ model = Sequential([
 model.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 
 
-# In[3]:
-
 from keras.datasets import mnist
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-
-# In[4]:
 
 X_train = X_train.reshape(60000, 784)
 X_test = X_test.reshape(10000, 784)
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
-X_train /= 255
-X_test /= 255
+X_train /= 255.0
+X_test /= 255.0
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
@@ -51,22 +38,8 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 
-# In[5]:
+vanila = model.fit(X_train, y_train, batch_size=128, epochs=20, verbose=1, validation_split=.1)
 
-vanila = model.fit(X_train, y_train, batch_size=128, epochs=10, verbose=1)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[6]:
 
 from keras.layers import Dropout
 
@@ -81,25 +54,16 @@ model_dropout.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_dropout = model_dropout.fit(X_train, y_train, batch_size=128,
                             epochs=20, verbose=1, validation_split=.1)
 
+df_vanila = pd.DataFrame(vanila.history)
+df_vanila[['acc', 'val_acc']].plot()
+plt.ylabel("accuracy")
+df_vanila[['loss', 'val_loss']].plot(linestyle='--', ax=plt.twinx())
+plt.ylabel("loss")
 
-# In[12]:
 
-df = pd.DataFrame(vanila.history)
-df[['acc']].plot()
 df_dropout = pd.DataFrame(history_dropout.history)
-df_dropout[['acc']].plot()
+df_dropout[['acc', 'val_acc']].plot()
 plt.ylabel("accuracy")
-
-
-# In[17]:
-
-df = pd.DataFrame(history_dropout.history)
-df[['acc', 'val_acc']].plot()
-plt.ylabel("accuracy")
-plt.ylim(.9, 1)
-
-
-# In[ ]:
-
-
+df_dropout[['loss', 'val_loss']].plot(linestyle='--', ax=plt.twinx())
+plt.ylabel("loss")
 

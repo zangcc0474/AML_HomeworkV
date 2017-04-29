@@ -6,6 +6,8 @@ import tensorflow
 import keras
 import pandas as pd
 import numpy as np
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dropout
+from keras.layers import BatchNormalization
 
 train = sio.loadmat("/rigel/edu/coms4995/datasets/train_32x32.mat")
 test = sio.loadmat("/rigel/edu/coms4995/datasets/test_32x32.mat")
@@ -32,8 +34,6 @@ y_train_binary = to_categorical(y_train)
 y_test_xbinary=to_categorical(y_test)
 
 
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dropout
-from keras.layers import BatchNormalization
 
 num_classes = 11
 cnn = Sequential()
