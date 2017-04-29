@@ -1,16 +1,11 @@
-import numpy as np
-np.set_printoptions(precision=3, suppress=True)
-import pandas as pd
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import scale, StandardScaler
-
+import scipy.io as sio
+from keras.wrappers.scikit_learn import KerasClassifier, KerasRegressor
 from keras.models import Sequential
 from keras.layers import Dense, Activation
-import tensorflow as tf
+import tensorflow
+import keras
+import pandas as pd
 import numpy as np
-
-import scipy.io as sio
 
 train = sio.loadmat("/rigel/edu/coms4995/datasets/train_32x32.mat")
 test = sio.loadmat("/rigel/edu/coms4995/datasets/test_32x32.mat")
@@ -59,8 +54,8 @@ cnn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn = cnn.fit(x_train, y_train_binary,
                       batch_size = 200, epochs=30, verbose=1, validation_split=.2)
 
-
-print(cnn.evaluate(x_test, y_test_xbinary))
+score_basic = cnn.evaluate(x_test, y_test_xbinary)
+print("Task3 base model Test Accuracy: {:.3f}".format(score_basic[1]))
 
 
 num_classes = 11
@@ -81,4 +76,5 @@ cnn_small_bn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn_small_bn = cnn_small_bn.fit(x_train, y_train_binary,
                                         batch_size=200, epochs=30, verbose=1, validation_split=.2)
 
-print(cnn_small_bn.evaluate(x_test,y_test_xbinary))
+score_batch = nn_small_bn.evaluate(x_test,y_test_xbinary)
+print("Task3 batch model Test Accuracy: {:.3f}".format(score_batch[1]))
