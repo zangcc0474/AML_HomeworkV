@@ -52,10 +52,10 @@ cnn.add(Dense(num_classes, activation='softmax'))
 
 cnn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn = cnn.fit(x_train, y_train_binary,
-                      batch_size = 200, epochs=30, verbose=1, validation_split=.2)
+                      batch_size = 200, epochs=50, verbose=1, validation_split=.2)
 
 score_basic = cnn.evaluate(x_test, y_test_xbinary)
-print("Task3 base model Test Accuracy: {:.3f}".format(score_basic[1]))
+print("Task3 base model Test Accuracy: {:.2f}".format(score_basic[1]))
 
 
 num_classes = 11
@@ -74,7 +74,7 @@ cnn_small_bn.add(Dense(64, activation='relu'))
 cnn_small_bn.add(Dense(num_classes, activation='softmax'))
 cnn_small_bn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn_small_bn = cnn_small_bn.fit(x_train, y_train_binary,
-                                        batch_size=200, epochs=30, verbose=1, validation_split=.2)
+                                        batch_size=200, epochs=50, verbose=1, validation_split=.2)
 
 score_batch = cnn_small_bn.evaluate(x_test,y_test_xbinary)
-print("Task3 batch model Test Accuracy: {:.3f}".format(score_batch[1]))
+print("Task3 batch model Test Accuracy: {:.2f}".format(score_batch[1]))
