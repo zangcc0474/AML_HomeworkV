@@ -38,9 +38,9 @@ grid = GridSearchCV(clf, param_grid=param_grid, cv=5)
 
 grid.fit(X_train, y_train)
 
-res = pd.DataFrame(grid.cv_results_)
-res.pivot_table(index=["param_epochs", "param_hidden_size"],
-                values=['mean_train_score', "mean_test_score"])
+# res = pd.DataFrame(grid.cv_results_)
+# res.pivot_table(index=["param_epochs", "param_hidden_size"],
+#                 values=['mean_train_score', "mean_test_score"])
 
 print("Test Accuracy:")
 print (np.mean((grid.predict(X_test) == y_test)))
