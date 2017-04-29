@@ -2,7 +2,7 @@ import os
 from keras.preprocessing import image
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.cross_validation import train_test_split
 from keras.applications.vgg16 import preprocess_input
 from keras.preprocessing import image
 from keras import applications
