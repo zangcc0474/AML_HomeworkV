@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-image_list = pd.read_csv('/rigel/edu/coms4995/users/cz2431/list.txt',sep=' ',skiprows = 6,header= None)
+image_list = pd.read_csv('/rigel/edu/coms4995/users/cz2431/AML_HomeworkV/task4/list.txt',sep=' ',skiprows = 6,header= None)
 image_names = image_list[:][0]
 image_names = np.asarray(image_names)
 
