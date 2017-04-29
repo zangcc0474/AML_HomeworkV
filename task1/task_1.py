@@ -5,6 +5,7 @@ from sklearn.cross_validation import train_test_split
 import keras
 from keras.wrappers.scikit_learn import KerasClassifier, KerasRegressor
 from sklearn.grid_search import GridSearchCV
+import pandas as pd
 
 iris = load_iris()
 X, y = iris.data, iris.target
