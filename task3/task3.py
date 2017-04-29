@@ -12,8 +12,8 @@ import numpy as np
 
 import scipy.io as sio
 
-train = sio.loadmat("train_32x32.mat")
-test = sio.loadmat("test_32x32.mat")
+train = sio.loadmat("/rigel/edu/coms4995/datasets/train_32x32.mat")
+test = sio.loadmat("/rigel/edu/coms4995/datasets/test_32x32.mat")
 
 x_train = train['X']
 y_train = train['y']
