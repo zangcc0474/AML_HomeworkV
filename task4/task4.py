@@ -7,6 +7,9 @@ from keras.applications.vgg16 import preprocess_input
 from keras.preprocessing import image
 from keras import applications
 from sklearn.linear_model import LogisticRegressionCV
+from sklearn.multiclass import OneVsOneClassifier
+from sklearn.svm import LinearSVC
+
 
 image_list = pd.read_csv('/rigel/edu/coms4995/users/cz2431/AML_HomeworkV/task4/list.txt',sep=' ',skiprows = 6,header= None)
 image_names = image_list[:][0]
@@ -30,7 +33,8 @@ y[int(features.shape[0])/2:] = 1
 X_train, X_test, y_train, y_test = train_test_split(features_, y, stratify=y)
 
 
-lr = LogisticRegressionCV().fit(X_train, y_train)
+oneall = OneVsOneClassifier(LinearSVC(random_state=0)).fit(X_train, y_train)
+oneall_lr = OneVsOneClassifier(LogisticRegressionCV(random_state=0)).fit(X_train, y_train)
 
-print("Train score: {:.3f}".format(lr.score(X_train, y_train)))
-print("Test score: {:.3f}".format(lr.score(X_test, y_test)))
+print("LinearSVC score: {:.3f}".format(oneall.score(X_train, y_train)))
+print("LogisticRegressionCV score: {:.3f}".format(oneall_lr.score(X_test, y_test)))

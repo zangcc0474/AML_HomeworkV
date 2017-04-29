@@ -12,12 +12,6 @@ X, y = iris.data, iris.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
 
-num_classes = 3
-# convert class vectors to binary class matrices
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
-
-
 def make_model(optimizer="adam", hidden_size=32):
     model = Sequential([
         Dense(32, input_shape=(4,)),
