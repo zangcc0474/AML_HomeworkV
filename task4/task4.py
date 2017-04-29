@@ -32,5 +32,5 @@ X_train, X_test, y_train, y_test = train_test_split(features_, y, stratify=y)
 
 lr = LogisticRegressionCV().fit(X_train, y_train)
 
-print("Train score: " + str(lr.score(X_train, y_train)))
-print("Test score: "  + str(lr.score(X_test, y_test)))
+print("Train score: {:.3f}".format(lr.score(X_train, y_train)))
+print("Test score: {:.3f}".format(lr.score(X_test, y_test)))

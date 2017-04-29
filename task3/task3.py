@@ -76,5 +76,5 @@ cnn_small_bn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn_small_bn = cnn_small_bn.fit(x_train, y_train_binary,
                                         batch_size=200, epochs=30, verbose=1, validation_split=.2)
 
-score_batch = nn_small_bn.evaluate(x_test,y_test_xbinary)
+score_batch = cnn_small_bn.evaluate(x_test,y_test_xbinary)
 print("Task3 batch model Test Accuracy: {:.3f}".format(score_batch[1]))

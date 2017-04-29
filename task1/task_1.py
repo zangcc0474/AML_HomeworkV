@@ -37,23 +37,12 @@ grid = GridSearchCV(clf, param_grid=param_grid, cv=5)
 
 grid.fit(X_train, y_train)
 
-model = Sequential([
-        Dense(1024, input_shape=(4,)),
-        Activation('relu'),
-        Dense(1024),
-        Activation('relu'),
-        Dense(3),
-        Activation('softmax'),
-    ])
+res = pd.DataFrame(grid.cv_results_)
+res.pivot_table(index=["param_epochs", "param_hidden_size"],
+                values=['mean_train_score', "mean_test_score"])
 
-model.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
-history = model.fit(X_train, y_train, batch_size=128, epochs=20, verbose=1, validation_split=.1)
-
-
-score = model.evaluate(X_test, y_test, verbose=0)
-
-
-print(score)
+print("Test Accuracy:")
+print (np.mean((grid.predict(X_test) == y_test)))
 
 
 
