@@ -57,7 +57,7 @@ cnn.add(Dense(num_classes, activation='softmax'))
 
 cnn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn = cnn.fit(x_train, y_train_binary,
-                      batch_size = 200, epochs=50, verbose=1, validation_split=.2)
+                      batch_size = 200, epochs=30, verbose=1, validation_split=.2)
 
 
 print(cnn.evaluate(x_test, y_test_xbinary))
@@ -79,6 +79,6 @@ cnn_small_bn.add(Dense(64, activation='relu'))
 cnn_small_bn.add(Dense(num_classes, activation='softmax'))
 cnn_small_bn.compile("adam", "categorical_crossentropy", metrics=['accuracy'])
 history_cnn_small_bn = cnn_small_bn.fit(x_train, y_train_binary,
-                                        batch_size=200, epochs=50, verbose=1, validation_split=.2)
+                                        batch_size=200, epochs=30, verbose=1, validation_split=.2)
 
 print(cnn_small_bn.evaluate(x_test,y_test_xbinary))
